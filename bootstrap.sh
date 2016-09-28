@@ -4,7 +4,7 @@ if ! [ -x "$(command -v git)" ]; then
 fi
 
 
-if [ -d ! "/opt/provisionTool" ]; then
+if ! [ -d "/opt/provisionTool" ]; then
   cd /opt
   git clone https://github.com/kingstonlee/provisionTool.git
 fi
