@@ -1,7 +1,10 @@
 if ! [ -x "$(command -v git)" ]; then
   echo 'git is not installed.' >&2
-  apt-get install git
+  apt-get install -y git
 fi
 
-cd /opt
-git clone https://github.com/kingstonlee/provisionTool.git
+
+if [ -d ! "/opt/provisionTool" ]; then
+  cd /opt
+  git clone https://github.com/kingstonlee/provisionTool.git
+fi
