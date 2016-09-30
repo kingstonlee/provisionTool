@@ -24,9 +24,11 @@ fi
 echo "Script Schedule Checked"
 
 echo "Checking Required Packages are Installed"
+chmod +x ${PACKAGESCRIPT}
 exec ${PACKAGESCRIPT}
 echo "Packages Checked"
 
 echo "Checking Services are Running"
+chmod +x ${SERVICESCRIPT}
 exec ${SERVICESCRIPT}
 echo "Services Checked"
