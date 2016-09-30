@@ -4,9 +4,11 @@ A basic provisioning tool to setup an Ubuntu machine with Apache and PHP
 
 ## Initial Setup
 Download the bootstrap.sh file and run it using this command:
+
 `wget https://raw.githubusercontent.com/kingstonlee/provisionTool/master/bootstrap.sh -O - | sh`
 
 ## Running Manually
+
 `/opt/provisionTool/init.sh`
 
 ## How It Works
