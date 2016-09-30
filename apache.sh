@@ -1,10 +1,15 @@
 #!/bin/bash
 CURRENTHELLOWORLD=/var/www/html/helloworld.php
 GITHELLOWORLD=/opt/provisionTool/apache2/helloworld.php
+CURRENTAPACHE2CONFIG=/etc/apache2/apache2.conf
+GITAPACHE2CONFIG=/opt/provisionTool/apache2/apache2.conf
 
 function apacheConfigtestRestart() {
   if [[ $(apache2ctl configtest) ]]; then
     /etc/init.d/apache2 reload
+    echo "Apache Reloaded"
+  else
+    echo "ERROR CONFIGTEST FAILED"
   fi
 }
 
@@ -27,3 +32,8 @@ else
 fi
 
 # Changes to apached config files
+if cmp ${CURRENTAPACHE2CONFIG} ${GITAPACHE2CONFIG}; then
+  echo "No Apache config change"
+else
+  echo "ConfigTesting new change"
+  apacheConfigtestRestart
