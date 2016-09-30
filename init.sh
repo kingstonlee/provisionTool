@@ -1,6 +1,6 @@
 #!/bin/bash
 # Does Apache2 exist?
-if dpkg -s "apache2"; then
+if dpkg -s "apache2" > /dev/null 2>&1 ; then
  echo "apache2 already installed"
 else
  # Install Apache2
@@ -8,7 +8,7 @@ else
 fi
 
 # Does php exist?
-if dpkg -s "php5"; then
+if dpkg -s "php5" > /dev/null 2>&1 ; then
  echo "php5 already installed"
 else
  # Install PHP
