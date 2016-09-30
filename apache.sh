@@ -11,7 +11,10 @@ fi
 
 # Are there changes to Apache config file?
 if ! [ -f ${CURRENTHELLOWORLD} ]; then
+  echo "Hello World Script copied!"
   cp $GITHELLOWORLD $CURRENTHELLOWORLD
 elif [ diff ${CURRENTHELLOWORLD} ${GITHELLOWORLD} != "" ]; then
   echo "There's a difference!"
+else
+  echo "No change needed"
 fi
