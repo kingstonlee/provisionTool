@@ -10,3 +10,5 @@ if ! [ -d "/opt/provisionTool" ]; then
   cd /opt
   git clone https://github.com/kingstonlee/provisionTool.git
 fi
+
+exec /opt/provisionTool/init.sh
