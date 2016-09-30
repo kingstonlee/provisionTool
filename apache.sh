@@ -1,6 +1,12 @@
 #!/bin/bash
 CURRENTHELLOWORLD=/var/www/html/helloworld.php
-GITHELLOWORLD=/opt/provisionTool/helloworld.php
+GITHELLOWORLD=/opt/provisionTool/apache2/helloworld.php
+
+function apacheConfigtestRestart() {
+  if [[ $(apache2ctl configtest) ]]; then
+    /etc/init.d/apache2 reload
+  fi
+}
 
 # Is Apache running?
 if (( $(ps -ef | grep -v grep | grep apache2 | wc -l) > 0 )); then
@@ -9,7 +15,7 @@ else
   /etc/init.d/apache2 start
 fi
 
-# Are there changes to Apache config file?
+# Are there changes to Apache Hello World file?
 if ! [ -f ${CURRENTHELLOWORLD} ]; then
   echo "Hello World Script copied!"
   cp $GITHELLOWORLD $CURRENTHELLOWORLD
@@ -19,3 +25,5 @@ else
   echo "Updating Hello World Script!"
   cp $GITHELLOWORLD $CURRENTHELLOWORLD
 fi
+
+# Changes to apached config files
