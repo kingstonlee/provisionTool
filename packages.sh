@@ -26,8 +26,6 @@ else
  sudo apt-get -y install php5
 fi
 
-for
-
 function install() {
   sudo apt-get -y install $service
 }
