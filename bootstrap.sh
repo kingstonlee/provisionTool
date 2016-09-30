@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if ! [ -x "$(command -v git)" ]; then
   echo 'git is not installed.' >&2
   apt-get install -y git
