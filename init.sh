@@ -25,8 +25,7 @@ else
   /etc/init.d/apache2 start
 fi
 
-crontab -l | grep ${INITSCRIPT}
-crontabcheck=`echo $?`
+crontabcheck=`crontab -l | grep ${INITSCRIPT}`
 # If:
 # res = 0 the command is already in the cron tab
 # res = 1 the command is not in the cron tab
