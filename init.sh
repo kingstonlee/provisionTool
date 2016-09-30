@@ -17,7 +17,7 @@ fi
 
 # Is Apache running?
 if (( $(ps -ef | grep -v grep | grep apache2 | wc -l) > 0 )); then
-  echo "$service is running!!!"
+  echo "apache2 is running!"
 else
-  /etc/init.d/$service start
+  /etc/init.d/apache2 start
 fi
