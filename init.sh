@@ -25,13 +25,13 @@ else
   /etc/init.d/apache2 start
 fi
 
-crontab -l | grep INITSCRIPT
+crontab -l | grep ${INITSCRIPT}
 crontabcheck=`echo $?`
 # If:
 # res = 0 the command is already in the cron tab
 # res = 1 the command is not in the cron tab
 if [ "$crontabcheck" -eq 1 ]; then
-  echo " * Adding the update index command to the crontab..."
+  echo "Init script is being added to cron"
   # Every 10 mins.
   crontab -l | { cat; echo "*/10 * * * * ${INITSCRIPT}"; } | crontab -
 else
