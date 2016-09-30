@@ -10,7 +10,8 @@ else
 fi
 
 # Are there changes to Apache config file?
-DIFF=`diff ${CURRENTHELLOWORLD} ${GITHELLOWORLD}`
-if [ ${DIFF} != "" ]; then
+if ! [ -f ${CURRENTHELLOWORLD} ]; then
+  cp $GITHELLOWORLD $CURRENTHELLOWORLD
+elif [ diff ${CURRENTHELLOWORLD} ${GITHELLOWORLD} != "" ]; then
   echo "There's a difference!"
 fi
