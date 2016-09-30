@@ -37,3 +37,4 @@ if cmp ${CURRENTAPACHE2CONFIG} ${GITAPACHE2CONFIG}; then
 else
   echo "ConfigTesting new change"
   apacheConfigtestRestart
+fi
