@@ -13,8 +13,9 @@ fi
 if ! [ -f ${CURRENTHELLOWORLD} ]; then
   echo "Hello World Script copied!"
   cp $GITHELLOWORLD $CURRENTHELLOWORLD
-elif [ cmp -s ${CURRENTHELLOWORLD} ${GITHELLOWORLD} ]; then
-  echo "There's a difference!"
+elif cmp ${CURRENTHELLOWORLD} ${GITHELLOWORLD}; then
+  echo "No change needed!"
 else
-  echo "No change needed"
+  echo "Updating Hello World Script!"
+  cp $GITHELLOWORLD $CURRENTHELLOWORLD
 fi
