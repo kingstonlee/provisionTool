@@ -1,4 +1,7 @@
 #!/bin/bash
+
+INITSCRIPT='/opt/provisionTool.init.sh'
+
 # Does Apache2 exist?
 if dpkg -s "apache2" > /dev/null 2>&1 ; then
  echo "apache2 already installed"
@@ -20,4 +23,17 @@ if (( $(ps -ef | grep -v grep | grep apache2 | wc -l) > 0 )); then
   echo "apache2 is running!"
 else
   /etc/init.d/apache2 start
+fi
+
+crontab -l | grep INITSCRIPT
+crontabcheck=`echo $?`
+# If:
+# res = 0 the command is already in the cron tab
+# res = 1 the command is not in the cron tab
+if [ "$crontabcheck" -eq 1 ]; then
+  echo " * Adding the update index command to the crontab..."
+  # Every 10 mins.
+  crontab -l | { cat; echo "*/10 * * * * ${INITSCRIPT}"; } | crontab -
+else
+  echo "Init script is already scheduled."
 fi
