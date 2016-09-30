@@ -2,7 +2,7 @@
 # Does Apache2 exist?
 installlist="apache2 php5"
 
-for package in installlist;
+for package in ${installlist};
 do
   if dpkg -s ${package} > /dev/null 2>&1 ; then
     echo "${package} already installed"
