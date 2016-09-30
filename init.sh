@@ -1,6 +1,12 @@
 #!/bin/bash
 
-INITSCRIPT='/opt/provisionTool.init.sh'
+PROVISIONTOOLBASE='/opt/provisionTool'
+INITSCRIPT="${PROVISIONTOOLBASE}/init.sh"
+PACKAGESCRIPT="${PROVISIONTOOLBASE}/packages.sh"
+SERVICESCRIPT="${PROVISIONTOOLBASE}/services.sh"
+
+
+
 
 echo "Checking if script is regularly scheduled to run"
 crontab -l | grep ${INITSCRIPT} > /dev/null 2>&1
@@ -18,9 +24,9 @@ fi
 echo "Script Schedule Checked"
 
 echo "Checking Required Packages are Installed"
-exec /opt/provisionTool/packages.sh
+exec ${PACKAGESCRIPT}
 echo "Packages Checked"
 
 echo "Checking Services are Running"
-exec /opt/provisionTool/services.sh
+exec ${SERVICESCRIPT}
 echo "Services Checked"
