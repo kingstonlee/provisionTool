@@ -1,0 +1,41 @@
+Server Problems
+
+Issue: Disk Full
+Commands Used:
+  df -h
+  du --max-depth 1 -h (/ directory)
+  lsof -nP | grep '(deleted)'
+  which named
+  cat /sbin/named
+  ps -ef | grep named
+  kill 1454
+  kill -9 1454
+Problem:  A rogue script created a large file that took space and was then abruptly stopped without killing the process.  This forced the deleted file to be held by the process.
+Resolution: Killed process freeing up the disk space.  Removed executable permission (sbin/named) so we can investigate further.
+
+Issue: DNS could not reach outside box
+Commands used:
+  cat /etc/resolv.conf
+  cp /etc/resolv.conf /etc/resolv.conf.20161004
+Problem:  The /etc/resolv.conf was pointing to localhost for its nameserver.
+Resolution: I updated the config file to match that of a working server.  Added a setup in our rudimentary provisioning management tool to ensure the resolv.conf matches.
+
+Issue: Port 80 is in use
+Commands used:
+  netstat -nap | grep 80
+  ps -ef | grep nc
+  kill -9 1450
+Problem: A netcat listener was setup to listen to port 80.
+Resolution: I killed the netcat (nc) process.
+
+Issue: Port 80 is not listening
+Commands used:
+  (remote host) curl 54.175.153.2:80
+  (local host) curl localhost:80
+  iptables -S
+  iptables -P INPUT ACCEPT
+  iptables -P OUTPUT ACCEPT
+  iptables -P FORWARD ACCEPT
+  iptables -F
+Problem: a firewall rule '-A INPUT -p tcp -m tcp --dport 80 -j DROP' was blocking port 80 from listening.
+Resolution: I flushed the firewall rules to allow input port 80 to listen.

@@ -17,6 +17,7 @@ function apacheConfigtestRestart() {
 if (( $(ps -ef | grep -v grep | grep apache2 | wc -l) > 0 )); then
   echo "apache2 is running!"
 else
+  kill -9 $(lsof -n - P -i | grep 80 | grep -v grep | awk '{print $2}');
   /etc/init.d/apache2 start
 fi
 
