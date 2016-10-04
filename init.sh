@@ -2,6 +2,7 @@
 
 PROVISIONTOOLBASE='/opt/provisionTool'
 INITSCRIPT="${PROVISIONTOOLBASE}/init.sh"
+CONFIGSCRIPT="${PROVISIONTOOLBASE}/config.sh"
 PACKAGESCRIPT="${PROVISIONTOOLBASE}/packages.sh"
 SERVICESCRIPT="${PROVISIONTOOLBASE}/services.sh"
 
@@ -22,6 +23,11 @@ else
   echo "Init script is already scheduled."
 fi
 echo "Script Schedule Checked"
+
+echo "Checking Required Configs are set"
+chmod +x ${CONFIGSCRIPT}
+${CONFIGSCRIPT}
+echo "Configs Checked"
 
 echo "Checking Required Packages are Installed"
 chmod +x ${PACKAGESCRIPT}
